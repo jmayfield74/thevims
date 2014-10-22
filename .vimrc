@@ -73,7 +73,7 @@ set number
 set relativenumber
 set cul
 
-set textwidth=80
+set textwidth=120
 " set colorcolumn=+1
 
 set hlsearch!
