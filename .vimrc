@@ -58,6 +58,12 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'jeetsukumaran/vim-nefertiti'
 Bundle 'greyblake/vim-preview'
 Bundle 'haya14busa/incsearch.vim'
+Bundle 'nice/sweater'
+Bundle 'malithsen/trello-vim'
+Bundle 'https://github.com/freeo/vim-kalisi'
+Bundle 'guns/vim-clojure-static'
+Bundle 'sjl/badwolf'
+Bundle 'Valloric/YouCompleteMe'
 
 " vim conf
 set nocompatible
@@ -73,7 +79,7 @@ set number
 set relativenumber
 set cul
 
-set textwidth=120
+set textwidth=80
 " set colorcolumn=+1
 
 set hlsearch!
@@ -143,13 +149,19 @@ endif
 
 " look-n-feel
 set t_Co=256
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
 " let g:solarized_termcolors=256
 " let g:solarized_termtrans=1
 syntax enable
 " set background=light
 set background=dark
+
+colorscheme badwolf
+" colorscheme kalisi
+" colorscheme sweater
 " colorscheme greyhouse
-colorscheme lucius
+" colorscheme lucius
 " let g:zenburn_alternate_Visual = 1
 let g:zenburn_high_Contrast=1
 " colorscheme zenburn
@@ -162,7 +174,7 @@ let g:zenburn_high_Contrast=1
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 12
 let g:Powerline_symbols = 'fancy'
 " LuciusLight
-LuciusBlack
+" LuciusBlack
 
 " line number inversion
 nmap <C-N><C-N> :set invnumber<CR>
@@ -292,14 +304,19 @@ map <leader>` :bp<cr>
 " endfunction
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "lucius"
+let g:airline_theme = "badwolf"
+" let g:airline_theme = "kalisi"
+" let g:airline_theme = "lucius"
 " let g:airline_theme = "molokai"
 " let g:airline_theme = "zenburn"
 
 nmap <F8> :TagbarToggle<CR>
 
-nmap <F5> :LuciusBlack<CR>
-nmap <F6> :LuciusLight<CR>
+" nmap <F5> :LuciusBlack<CR>
+" nmap <F6> :LuciusLight<CR>
+
+nmap <F5> :set background=dark<CR>
+nmap <F6> :set background=light<CR>
 
 map <leader>u :UndotreeToggle<cr>
 
