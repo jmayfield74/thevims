@@ -1,0 +1,27 @@
+double_buffer yes
+background        no
+out_to_console 	  yes
+out_to_x	  no
+update_interval	  1
+total_run_times	  0
+short_units	  yes
+pad_percents	  3
+
+use_spacer right
+override_utf8_locale yes
+use_xft     yes
+# xftfont Source Code Pro for Powerline:medium:size=23
+xftfont Source Code Pro Medium:size=23
+
+TEXT
+,[{"full_text": " ☕ $acpitemp°C ","color": "\#DC433F"},
+  {"full_text": " ≣ [$membar] ", "color":"\#B58900"},
+  {"full_text": " ⚒ [$cpubar] ", "color":"\#00A9B5"},
+  {"full_text": " ☄ ${wireless_essid wlan0} ","color":"\#33CC99"},
+  {"full_text": " ▲ [${upspeed wlan0}]", "color":"\#ff0000"},
+  {"full_text": " ▼ [${downspeed wlan0}] ", "color":"\#00fff2"},
+  {"full_text": " ♪ ${exec amixer get Master | grep -o "\[.*%\]"} ", "color":"\#268BD2"},
+  {"full_text": " ⚡ [$battery_percent%] ","color":"\#ccaa55"},
+  {"full_text": " ${time %a %d %b} ${time %I:%M %p} "}
+]
+
