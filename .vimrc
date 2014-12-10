@@ -58,6 +58,15 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'jeetsukumaran/vim-nefertiti'
 Bundle 'greyblake/vim-preview'
 Bundle 'haya14busa/incsearch.vim'
+Bundle 'nice/sweater'
+Bundle 'malithsen/trello-vim'
+Bundle 'https://github.com/freeo/vim-kalisi'
+Bundle 'guns/vim-clojure-static'
+Bundle 'sjl/badwolf'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'vimwiki/vimwiki'
+Bundle 'kongo2002/fsharp-vim'
+Bundle 'hsanson/vim-android'
 
 " vim conf
 set nocompatible
@@ -110,7 +119,7 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>!
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR> 
 
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -132,24 +141,30 @@ let ctrlp_custom_ignore = '\.git$\|\.pyc$\|\.beam$\|\.swp$|doc$'
 let g:ctrlp_use_caching = 0
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
+" if executable('ag')
   " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
 
 
 " look-n-feel
 set t_Co=256
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
 " let g:solarized_termcolors=256
 " let g:solarized_termtrans=1
 syntax enable
 " set background=light
 set background=dark
+
+" colorscheme badwolf
+colorscheme kalisi
+" colorscheme sweater
 " colorscheme greyhouse
-colorscheme lucius
+" colorscheme lucius
 " let g:zenburn_alternate_Visual = 1
 let g:zenburn_high_Contrast=1
 " colorscheme zenburn
@@ -162,7 +177,7 @@ let g:zenburn_high_Contrast=1
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 12
 let g:Powerline_symbols = 'fancy'
 " LuciusLight
-LuciusBlack
+" LuciusBlack
 
 " line number inversion
 nmap <C-N><C-N> :set invnumber<CR>
@@ -292,14 +307,19 @@ map <leader>` :bp<cr>
 " endfunction
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "lucius"
+" let g:airline_theme = "badwolf"
+let g:airline_theme = "kalisi"
+" let g:airline_theme = "lucius"
 " let g:airline_theme = "molokai"
 " let g:airline_theme = "zenburn"
 
 nmap <F8> :TagbarToggle<CR>
 
-nmap <F5> :LuciusBlack<CR>
-nmap <F6> :LuciusLight<CR>
+" nmap <F5> :LuciusBlack<CR>
+" nmap <F6> :LuciusLight<CR>
+
+nmap <F5> :set background=dark<CR>
+nmap <F6> :set background=light<CR>
 
 map <leader>u :UndotreeToggle<cr>
 
@@ -345,3 +365,28 @@ let g:gist_post_private = 1
 map <leader>b :CtrlPBuffer<cr>
 map <leader>q :CtrlPQuickfix<cr>
 
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item 
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+set rtp+=/usr/local/share/ocamlmerlin/vim
+let g:android_sdk_path="./Downloads/adt-bundle-linux-x86_64-20140702/sdk"
